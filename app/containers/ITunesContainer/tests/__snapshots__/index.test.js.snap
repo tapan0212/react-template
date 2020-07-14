@@ -3,8 +3,16 @@
 exports[`<ITunesContainer /> container tests should render and match the snapshot 1`] = `
 <body>
   <div>
-    <div>
+    <div
+      class="ITunesContainer__Container-lb7bgf-1 KuItF"
+    >
       ITunesContainer
+      <input
+        class="ant-input"
+        data-testid="search-bar"
+        type="text"
+        value=""
+      />
     </div>
   </div>
 </body>

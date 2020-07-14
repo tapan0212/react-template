@@ -10,9 +10,8 @@ export default {
   iTunes: {
     route: '/tunes',
     props: {
-      maxwidth: 500,
+      maxwidth: 800,
       padding: 20
-    },
-    exact: true
+    }
   }
 };

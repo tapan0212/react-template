@@ -1,17 +1,43 @@
 import { createSelector } from 'reselect';
+import get from 'lodash/get';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the iTunesContainer state domain
+ * Direct selector to the homeContainer state domain
  */
 
-const selectITunesContainerDomain = state => (state.iTunesContainer || initialState).toJS();
+const selectITunesContainerDomain = state => state.iTuneContainer || initialState;
 
-const makeSelectITunesContainer = () =>
+/**
+ * Other specific selectors
+ */
+
+/**
+ * Default selector used by HomeContainer
+ */
+
+export const selectITunesContainer = () =>
   createSelector(
     selectITunesContainerDomain,
     substate => substate
   );
 
-export default makeSelectITunesContainer;
-export { selectITunesContainerDomain };
+export const selectITunesData = () =>
+  createSelector(
+    selectITunesContainerDomain,
+    substate => get(substate, 'iTunesData', null)
+  );
+
+export const selectITunesError = () =>
+  createSelector(
+    selectITunesContainerDomain,
+    substate => get(substate, 'iTunesError', null)
+  );
+
+export const selectITuneName = () =>
+  createSelector(
+    selectITunesContainerDomain,
+    substate => get(substate, 'iTuneName', null)
+  );
+
+export default selectITunesContainer;
