@@ -39,5 +39,16 @@ export const selectITuneName = () =>
     selectITunesContainerDomain,
     substate => get(substate, 'iTuneName', null)
   );
+export const selectCurrentTune = () =>
+  createSelector(
+    selectITunesContainerDomain,
+    substate => get(substate, 'currentTune', null)
+  );
+
+export const selectSelectedTune = () =>
+  createSelector(
+    selectITunesContainerDomain,
+    substate => get(substate, 'selectedTune', null)
+  );
 
 export default selectITunesContainer;

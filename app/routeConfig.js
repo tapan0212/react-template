@@ -1,6 +1,7 @@
 import NotFound from '@containers/NotFoundPage/Loadable';
 import HomeContainer from '@containers/HomeContainer/Loadable';
 import ITunesContainer from '@containers/ITunesContainer/Loadable';
+import TuneContainer from '@containers/TuneContainer/Loadable';
 import routeConstants from '@utils/routeConstants';
 export const routeConfig = {
   repos: {
@@ -10,6 +11,10 @@ export const routeConfig = {
   iTunes: {
     component: ITunesContainer,
     ...routeConstants.iTunes
+  },
+  tune: {
+    component: TuneContainer,
+    ...routeConstants.tune
   },
   notFoundPage: {
     component: NotFound,

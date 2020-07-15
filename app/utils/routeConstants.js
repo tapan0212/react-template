@@ -13,5 +13,8 @@ export default {
       maxwidth: 800,
       padding: 20
     }
+  },
+  tune: {
+    route: '/tune/:tuneId'
   }
 };

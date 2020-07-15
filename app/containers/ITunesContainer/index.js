@@ -12,14 +12,23 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import isEmpty from 'lodash/isEmpty';
-import { useInjectSaga } from '@utils/injectSaga';
 import styled from 'styled-components';
-import saga from './saga';
 import get from 'lodash/get';
 import debounce from 'lodash/debounce';
 import { Card, Skeleton, Input } from 'antd';
-import { selectITunesContainer, selectITunesData, selectITunesError, selectITuneName } from './selectors';
+import If from '@app/components/If';
+import { useInjectSaga } from '@utils/injectSaga';
+import TuneCard from './TuneCard';
+import PlayingTuneCard from './PlayingTuneCard';
+import {
+  selectITunesContainer,
+  selectITunesData,
+  selectITunesError,
+  selectITuneName,
+  selectCurrentTune
+} from './selectors';
 import { iTunesContainerCreators } from './reducer';
+import saga from './saga';
 
 const CustomCard = styled(Card)`
   && {
@@ -42,15 +51,17 @@ const Container = styled.div`
 export function ITunesContainer({
   dispatchITunes,
   dispatchClearITunes,
+  dispatchCurrentTune,
+  dispatchSelectedTune,
   iTunesData = {},
   iTunesError = null,
   iTuneName,
+  currentTune,
   maxwidth,
   padding
 }) {
   useInjectSaga({ key: 'iTunesContainer', saga });
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     const loaded = get(iTunesData, 'results', null) || iTunesError;
     if (loading && loaded) {
@@ -64,7 +75,6 @@ export function ITunesContainer({
       setLoading(true);
     }
   }, []);
-
   const handleChange = iName => {
     if (!isEmpty(iName)) {
       dispatchITunes(iName);
@@ -73,7 +83,6 @@ export function ITunesContainer({
     }
   };
   const handleDebounce = debounce(handleChange, 200);
-
   const renderITunes = () => {
     const tunes = get(iTunesData, 'results', []);
     const songs = tunes.filter(tune => tune.kind === 'song' && tune.isStreamable) || [];
@@ -92,7 +101,17 @@ export function ITunesContainer({
                 <T id="matching_tunes" values={{ totalCount }} />
               </div>
             )}
-            {/* {songs.map((song, index) => console.log(song))} */}
+            {songs.map((song, index) => {
+              return (
+                <TuneCard
+                  key={index}
+                  song={song}
+                  currentTune={currentTune}
+                  dispatchCurrentTune={dispatchCurrentTune}
+                  dispatchSelectedTune={dispatchSelectedTune}
+                />
+              );
+            })}
           </Skeleton>
         </CustomCard>
       )
@@ -100,19 +119,23 @@ export function ITunesContainer({
   };
 
   return (
-    <Container maxwidth={maxwidth} padding={padding}>
+    <Container>
       <Helmet>
         <title>ITunesContainer</title>
         <meta name="description" content="Description of ITunesContainer" />
       </Helmet>
-      <T id={'ITunesContainer'} />
-      <Input
-        data-testid="search-bar"
-        defaultValue={iTuneName}
-        type="text"
-        onChange={e => handleDebounce(e.target.value)}
-      />
-      {renderITunes()}
+      <Container maxwidth={maxwidth} padding={padding}>
+        <Input
+          data-testid="search-bar"
+          defaultValue={iTuneName}
+          type="text"
+          onChange={e => handleDebounce(e.target.value)}
+        />
+        {renderITunes()}
+      </Container>
+      <If condition={currentTune}>
+        <PlayingTuneCard currentTune={currentTune} dispatchCurrentTune={dispatchCurrentTune} />
+      </If>
     </Container>
   );
 }
@@ -120,29 +143,31 @@ export function ITunesContainer({
 ITunesContainer.propTypes = {
   dispatchITunes: PropTypes.func,
   dispatchClearITunes: PropTypes.func,
+  dispatchCurrentTune: PropTypes.func,
+  dispatchSelectedTune: PropTypes.func,
   iTunesData: PropTypes.array,
   iTunesError: PropTypes.object,
   iTuneName: PropTypes.string,
+  currentTune: PropTypes.object,
   maxwidth: PropTypes.number,
   padding: PropTypes.number
-};
-ITunesContainer.defaultProps = {
-  maxwidth: 500,
-  padding: 20
 };
 
 const mapStateToProps = createStructuredSelector({
   iTunesContainer: selectITunesContainer(),
   iTunesData: selectITunesData(),
   iTunesError: selectITunesError(),
-  iTuneName: selectITuneName()
+  iTuneName: selectITuneName(),
+  currentTune: selectCurrentTune()
 });
 
 function mapDispatchToProps(dispatch) {
-  const { requestGetITunes, clearITunes } = iTunesContainerCreators;
+  const { requestGetITunes, clearITunes, setCurrentTune, setSelectedTune } = iTunesContainerCreators;
   return {
     dispatchITunes: iTuneName => dispatch(requestGetITunes(iTuneName)),
-    dispatchClearITunes: () => dispatch(clearITunes())
+    dispatchClearITunes: () => dispatch(clearITunes()),
+    dispatchCurrentTune: tune => dispatch(setCurrentTune(tune)),
+    dispatchSelectedTune: selectedTune => dispatch(setSelectedTune(selectedTune))
   };
 }
 

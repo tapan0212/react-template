@@ -19,5 +19,7 @@
   "matching_tunes": "Total number of matching tunes: {totalCount}",
   "tune_name": "Tune Name: {name}",
   "artist_name": "Artist Name: {artistName}",
+  "track_name": "Tune: {trackName}",
+  "released": "Release Year: {release}",
   "tunes_logo": "Tunes.io"
 }

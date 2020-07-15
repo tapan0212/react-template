@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TuneContainer /> container tests should render and match the snapshot 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="TuneContainer__CustomInfoCard-sc-1u7g34z-0 sPugY"
+      >
+        <div
+          class="TuneContainer__CustomCard-sc-1u7g34z-1 bcKNLx"
+        >
+          <div
+            class="TuneContainer__CustomImg-sc-1u7g34z-2 cfMkcz"
+          >
+            <img
+              alt=""
+            />
+          </div>
+          <div>
+            <p
+              class="T__StyledText-gjlic1-0 cbAvsY"
+              data-testid="t"
+            >
+              Tune: Perfect
+            </p>
+          </div>
+          <div>
+            <p
+              class="T__StyledText-gjlic1-0 cbAvsY"
+              data-testid="t"
+            >
+              Artist Name: Ed
+            </p>
+          </div>
+          <div>
+            <p
+              class="T__StyledText-gjlic1-0 cbAvsY"
+              data-testid="t"
+            >
+              Release Year: 2017
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

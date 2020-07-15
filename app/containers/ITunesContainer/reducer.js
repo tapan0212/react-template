@@ -5,9 +5,17 @@ export const { Types: iTunesContainerTypes, Creators: iTunesContainerCreators } 
   requestGetITunes: ['iTuneName'],
   successGetITunes: ['data'],
   failureGetITunes: ['error'],
-  clearITunes: []
+  clearITunes: [],
+  setCurrentTune: ['tune'],
+  setSelectedTune: ['selectedTune']
 });
-export const initialState = { iTuneName: null, iTunesData: [], iTunesError: null };
+export const initialState = {
+  iTuneName: null,
+  iTunesData: [],
+  iTunesError: null,
+  currentTune: null,
+  selectedTune: null
+};
 
 /* eslint-disable default-case, no-param-reassign */
 export const iTunesContainerReducer = (state = initialState, action) =>
@@ -23,6 +31,12 @@ export const iTunesContainerReducer = (state = initialState, action) =>
         break;
       case iTunesContainerTypes.FAILURE_GET_I_TUNES:
         draft.iTunesError = get(action.error, 'message', 'something_went_wrong');
+        break;
+      case iTunesContainerTypes.SET_CURRENT_TUNE:
+        draft.currentTune = action.tune;
+        break;
+      case iTunesContainerTypes.SET_SELECTED_TUNE:
+        draft.selectedTune = action.selectedTune;
         break;
     }
   });

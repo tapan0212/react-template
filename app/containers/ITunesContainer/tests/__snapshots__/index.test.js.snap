@@ -4,15 +4,18 @@ exports[`<ITunesContainer /> container tests should render and match the snapsho
 <body>
   <div>
     <div
-      class="ITunesContainer__Container-lb7bgf-1 KuItF"
+      class="ITunesContainer__Container-lb7bgf-1 keUrBv"
     >
-      ITunesContainer
-      <input
-        class="ant-input"
-        data-testid="search-bar"
-        type="text"
-        value=""
-      />
+      <div
+        class="ITunesContainer__Container-lb7bgf-1 keUrBv"
+      >
+        <input
+          class="ant-input"
+          data-testid="search-bar"
+          type="text"
+          value=""
+        />
+      </div>
     </div>
   </div>
 </body>
