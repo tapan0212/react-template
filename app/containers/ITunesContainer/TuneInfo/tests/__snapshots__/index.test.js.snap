@@ -1,17 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TuneContainer /> container tests should render and match the snapshot 1`] = `
+exports[`<TuneInfo /> should render and match the snapshot 1`] = `
 <body>
   <div>
-    <div>
+    <div
+      data-testid="tune-info"
+    >
       <div
-        class="TuneContainer__CustomInfoCard-sc-1u7g34z-0 sPugY"
+        class="TuneInfo__CustomInfoCard-sc-3vntfw-0 iwdbOp"
       >
         <div
-          class="TuneContainer__CustomCard-sc-1u7g34z-1 bcKNLx"
+          class="TuneInfo__CustomCard-sc-3vntfw-1 hfgazm"
         >
           <div
-            class="TuneContainer__CustomImg-sc-1u7g34z-2 cfMkcz"
+            class="TuneInfo__CustomImg-sc-3vntfw-2 KUsaJ"
           >
             <img
               alt=""

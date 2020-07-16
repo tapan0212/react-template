@@ -31,15 +31,6 @@ describe('<TuneCard />', () => {
     expect(dispatchCurrentTuneSpy).toBeCalled();
   });
 
-  // it('should dispatch dispatchSelectedTune when clicked on info btn', () => {
-  //   dispatchSelectedTuneSpy = jest.fn();
-  //   const { getByTestId } = renderWithIntl(
-  //     <TuneCard dispatchSelectedTune={dispatchSelectedTuneSpy} history={pushSpy} song={mockSongData} />
-  //   );
-  //   fireEvent.click(getByTestId('info_btn'));
-  //   expect(dispatchSelectedTuneSpy).toBeCalled();
-  // })
-
   it('should show play button', () => {
     const { getByTestId } = renderWithIntl(
       <TuneCard song={mockSongData} currentTune={{ trackId: 2 }} dispatchCurrentTune={dispatchCurrentTuneSpy} />

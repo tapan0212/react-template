@@ -39,4 +39,26 @@ describe('ITunesContainer reducer tests', () => {
       })
     ).toEqual(expectedResult);
   });
+
+  it('should return the currentTune when SET_CURRENT_TUNE is dispatched', () => {
+    const tune = { trackName: 'perfect' };
+    const expectedResult = { ...state, currentTune: tune };
+    expect(
+      iTunesContainerReducer(state, {
+        type: iTunesContainerTypes.SET_CURRENT_TUNE,
+        tune
+      })
+    ).toEqual(expectedResult);
+  });
+
+  it('should return the selectedTune when SET_SELECTED_TUNE is dispatched', () => {
+    const selectedTune = { trackName: 'perfect' };
+    const expectedResult = { ...state, selectedTune };
+    expect(
+      iTunesContainerReducer(state, {
+        type: iTunesContainerTypes.SET_SELECTED_TUNE,
+        selectedTune
+      })
+    ).toEqual(expectedResult);
+  });
 });

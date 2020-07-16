@@ -1,6 +1,6 @@
 /**
  *
- * TuneContainer
+ * TuneInfo
  *
  */
 
@@ -14,7 +14,7 @@ import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import T from '@components/T';
-import { selectSelectedTune } from '../ITunesContainer/selectors';
+import { selectSelectedTune } from '../selectors';
 
 const CustomInfoCard = styled.div`
   width: 50vw;
@@ -33,11 +33,11 @@ const CustomImg = styled.div`
   margin-bottom: 5vh;
 `;
 export function TuneContainer({ selectedTune }) {
-  const artistName = selectedTune.artistName || null;
-  const trackName = selectedTune.trackName || null;
-  const release = selectedTune.releaseDate.substring(0, 4) || null;
+  const artistName = selectedTune?.artistName;
+  const trackName = selectedTune?.trackName;
+  const release = selectedTune?.releaseDate?.substring(0, 4);
   return (
-    <div>
+    <div data-testid="tune-info">
       <Helmet>
         <title>TuneContainer</title>
         <meta name="description" content="Description of TuneContainer" />

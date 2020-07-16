@@ -7,6 +7,7 @@
 import React from 'react';
 import { renderWithIntl } from '@utils/testUtils';
 import PlayingTuneCard from '../index';
+import { fireEvent } from '@testing-library/dom';
 
 describe('<PlayingTuneCard />', () => {
   let dispatchCurrentTuneSpy;
@@ -29,5 +30,14 @@ describe('<PlayingTuneCard />', () => {
       <PlayingTuneCard currentTune={mockCurrentTune} dispatchCurrentTune={dispatchCurrentTuneSpy} />
     );
     expect(getByTestId('btn1')).toBeTruthy();
+  });
+
+  it('should dispatch dispatchCurrentTune after clicking on the button', () => {
+    dispatchCurrentTuneSpy = jest.fn();
+    const { getByTestId } = renderWithIntl(
+      <PlayingTuneCard dispatchCurrentTune={dispatchCurrentTuneSpy} currentTune={mockCurrentTune} />
+    );
+    fireEvent.click(getByTestId('btn1'));
+    expect(dispatchCurrentTuneSpy).toBeCalled();
   });
 });

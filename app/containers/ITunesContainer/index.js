@@ -58,7 +58,8 @@ export function ITunesContainer({
   iTuneName,
   currentTune,
   maxwidth,
-  padding
+  padding,
+  intl
 }) {
   useInjectSaga({ key: 'iTunesContainer', saga });
   const [loading, setLoading] = useState(false);
@@ -117,7 +118,22 @@ export function ITunesContainer({
       )
     );
   };
-
+  const renderErrorState = () => {
+    let iTuneError;
+    if (iTuneError) {
+      iTuneError = iTunesError;
+    } else if (!get(iTunesError, 'totalCount', 0)) {
+      iTuneError = 'tune_search_default';
+    }
+    return (
+      !loading &&
+      iTuneError && (
+        <CustomCard color={iTunesError ? 'red' : 'grey'}>
+          <T id={iTuneError} />
+        </CustomCard>
+      )
+    );
+  };
   return (
     <Container>
       <Helmet>
@@ -132,6 +148,7 @@ export function ITunesContainer({
           onChange={e => handleDebounce(e.target.value)}
         />
         {renderITunes()}
+        {renderErrorState()}
       </Container>
       <If condition={currentTune}>
         <PlayingTuneCard currentTune={currentTune} dispatchCurrentTune={dispatchCurrentTune} />
@@ -145,6 +162,7 @@ ITunesContainer.propTypes = {
   dispatchClearITunes: PropTypes.func,
   dispatchCurrentTune: PropTypes.func,
   dispatchSelectedTune: PropTypes.func,
+  intl: PropTypes.object,
   iTunesData: PropTypes.array,
   iTunesError: PropTypes.object,
   iTuneName: PropTypes.string,

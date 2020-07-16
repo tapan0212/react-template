@@ -15,6 +15,16 @@ exports[`<ITunesContainer /> container tests should render and match the snapsho
           type="text"
           value=""
         />
+        <div
+          class="ant-card ITunesContainer__CustomCard-lb7bgf-0 cvJnJe ant-card-bordered"
+          color="grey"
+        >
+          <div
+            class="ant-card-body"
+          >
+            Search for a tune by entering it's name,
+          </div>
+        </div>
       </div>
     </div>
   </div>
