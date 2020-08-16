@@ -43,3 +43,7 @@ jobs:
           args: --exclude '*' --include 'index.html' --acl public-read --follow-symlinks
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      - name: Invalidate CloudFront Cache
+              uses: chetan/invalidate-cloudfront-action@master
+              env:
+                DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
